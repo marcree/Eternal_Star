@@ -14,5 +14,12 @@ public class Boar : Enemy
    {
     base.Awake();
     patrolState = new BoarPatrolState();
+    chaseState = new BoarChaseState();
+   }
+
+   private void OnDrawGizmosSelected()
+   {
+      Gizmos.DrawWireSphere(transform.position+(Vector3)centerOffset + new Vector3(checkDistance*-transform.localScale.x,0,0),0.2f);
+
    }
 }

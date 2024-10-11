@@ -11,10 +11,11 @@ public override void OnEnter(Enemy enemy)
   }
   public override void LogicUpdate()
   {
-    //if(currentEnemy.physicsCheck.isCliff){
-
-        //currentEnemy.check = true;
-        //currentEnemy.physicsCheck.isGround = false;
+        if(currentEnemy.FoundPlayer())
+        {
+          currentEnemy.switchState(NPCState.Chase);
+          Debug.Log("Chase");
+        }
         if(!currentEnemy.physicsCheck.isGround||(currentEnemy.physicsCheck.touchLeftWall && currentEnemy.faceDir.x<0) || (currentEnemy.physicsCheck.touchRightWall && currentEnemy.faceDir.x>0))
         {
             currentEnemy. wait = true;
@@ -27,7 +28,6 @@ public override void OnEnter(Enemy enemy)
             currentEnemy.anim.SetBool("walk",true);
         
         }
-    //}   
     
   }
   
