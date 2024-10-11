@@ -13,13 +13,16 @@ public float invulnerableDuration;
 private float invulnerableCounter;
 public bool invulnerable;
 
+
+public UnityEvent<Character> OnHealthChange;
 public UnityEvent<Transform> OnTakeDamage;
 public UnityEvent OnDie;
 
 private void Start()
 {
     currentHealth =maxHealth;
-}
+    OnHealthChange?.Invoke(this);
+    }
 
 private void Update()
 {
@@ -51,6 +54,7 @@ private void Update()
             currentHealth =0;
             OnDie?.Invoke();
         }
+        OnHealthChange?.Invoke(this);
   }
 
   private void TriggerInvulnerable()
