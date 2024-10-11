@@ -8,6 +8,7 @@ public class BoarPatrolState : BaseState
 public override void OnEnter(Enemy enemy)
   {
     currentEnemy = enemy;
+    currentEnemy.currentSpeed = currentEnemy.normalSpeed;
   }
   public override void LogicUpdate()
   {

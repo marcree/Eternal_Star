@@ -29,6 +29,9 @@ public class Enemy : MonoBehaviour
     public float checkTimeCounter;
     public bool wait;
     public bool check;
+    public float lostTime;
+    public float lostTimeCounter;
+
     [Header("状态")]
     public bool isHurt;
     public bool isDead;
@@ -87,6 +90,15 @@ public class Enemy : MonoBehaviour
             waitTimeCounter = waitTime;
             transform.localScale = new Vector3(faceDir.x,1,1);
         }
+
+    }
+    if(!FoundPlayer()&&lostTime>0)
+    {
+        lostTimeCounter -= Time.deltaTime;
+    }
+    else
+    {
+        
     }
    }
 
@@ -138,7 +150,7 @@ public void switchState(NPCState state)
     isHurt = true;
     anim.SetTrigger("hurt");
     Vector2 dir = new Vector2(transform.position.x - attackTrans.position.x,0).normalized;
-
+    rb.velocity = new Vector2(0,rb.velocity.y);
     StartCoroutine(OnHurt(dir));
     
    }
