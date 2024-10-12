@@ -26,6 +26,7 @@ public void Update(){
         anim.SetBool("isGround",physicsCheck.isGround);
         anim.SetBool("isDead",playerController.isDead);
         anim.SetBool("isAttack",playerController.isAttack);
+        anim.SetBool("onWall", physicsCheck.onWall);
     }
 
     public void PlayHurt()

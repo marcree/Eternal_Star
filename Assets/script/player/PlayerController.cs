@@ -21,8 +21,10 @@ public PhysicsMaterial2D wall;
 [Header("状态")]
 public bool isHurt;
 public float hurtForce;
+    public float wallJumpForce;
 public bool isDead;
 public bool isAttack;
+    public bool wallJump;
    private void Awake()
    {
 
@@ -63,7 +65,8 @@ private void FixedUpdate()
 
 public void Move()
 {
-rb.velocity=new Vector2(inputDirection.x * speed * Time.deltaTime, rb.velocity.y);
+        if (!wallJump) 
+            rb.velocity=new Vector2(inputDirection.x * speed * Time.deltaTime, rb.velocity.y);
  int faceDir = (int)transform.localScale.x;
 
         if (inputDirection.x > 0)
@@ -78,9 +81,15 @@ rb.velocity=new Vector2(inputDirection.x * speed * Time.deltaTime, rb.velocity.y
 
   private void Jump(InputAction.CallbackContext obj)
   {
-    if (physicsCheck.isGround)
-    rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-        
+        if (physicsCheck.isGround)
+        {
+            rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+        }
+        else if (physicsCheck.onWall)
+        {
+            rb.AddForce(new Vector2(-inputDirection.x, 2f) * wallJumpForce, ForceMode2D.Impulse);
+            wallJump = true;
+        }
   }
 
 
@@ -113,5 +122,15 @@ private void PlayerAttack(InputAction.CallbackContext obj)
   private void CheckState()
   {
     GetComponent<Collider2D>().sharedMaterial = physicsCheck.isGround?normal : wall;
+
+        if (physicsCheck.onWall)
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 2f);
+        else
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
+
+        if (wallJump && rb.velocity.y < 0f)
+        {
+            wallJump = false;
+        }
   }
 }
