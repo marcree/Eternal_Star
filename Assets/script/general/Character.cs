@@ -8,6 +8,10 @@ public class Character : MonoBehaviour
   [Header("基本属性")]
   public  float maxHealth;
   public float currentHealth;
+    public float maxPower;
+    public float currentPower;
+    public float powerRecover;
+    public float powerRecoverSpeed;
   [Header("受伤无敌")]
 public float invulnerableDuration;
 private float invulnerableCounter;
@@ -21,7 +25,8 @@ public UnityEvent OnDie;
 private void Start()
 {
     currentHealth =maxHealth;
-    OnHealthChange?.Invoke(this);
+        currentPower = maxPower;
+        OnHealthChange?.Invoke(this);
     }
 
 private void Update()
@@ -34,6 +39,11 @@ private void Update()
             invulnerable = false;
         }
     }
+
+    if(currentPower < maxPower)
+        {
+            currentPower += Time.deltaTime * powerRecoverSpeed;
+        }
 }
 
   public void TakeDamage(Attack attacker)
@@ -44,6 +54,7 @@ private void Update()
     if(currentHealth - attacker.damage > 0)
         {
             currentHealth -= attacker.damage;
+           
     
             TriggerInvulnerable();
             OnTakeDamage?.Invoke(attacker.transform);
@@ -64,4 +75,10 @@ private void Update()
         invulnerableCounter = invulnerableDuration;
     }
   }
+
+    public void OnSlide(int cost)
+    {
+        currentPower -= cost;
+        OnHealthChange?.Invoke(this);
+    }
 }

@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
    private Rigidbody2D rb;
    private PlayerAnimation playerAnimation;
   private PhysicsCheck physicsCheck;
+    private Character character;
    [Header("基本参数")]
 public float speed;
 
@@ -19,6 +20,7 @@ public float jumpForce;
     public float wallJumpForce;
     public float slideDistance;
     public float slideSpeed;
+    public int slidePowerCost;
     [Header("材质")]
 public PhysicsMaterial2D normal;
 public PhysicsMaterial2D wall;
@@ -36,6 +38,7 @@ public bool isAttack;
      rb = GetComponent<Rigidbody2D>();
     physicsCheck = GetComponent<PhysicsCheck>();
     playerAnimation = GetComponent<PlayerAnimation>();
+        character = GetComponent<Character>(); 
     inputControl = new PlayerInputControl();
     inputControl.Gameplay.Jump.started +=Jump;
     inputControl.Gameplay.Attack.started += PlayerAttack;
@@ -107,7 +110,7 @@ private void PlayerAttack(InputAction.CallbackContext obj)
 
     private void Slide(InputAction.CallbackContext obj)
     {
-        if (!isSlide)
+        if (!isSlide&& physicsCheck.isGround && character.currentPower >= slidePowerCost)
         {
             isSlide = true;
 
@@ -116,6 +119,8 @@ private void PlayerAttack(InputAction.CallbackContext obj)
             gameObject.layer = LayerMask.NameToLayer("Enemy");
 
             StartCoroutine(TriggerSlide(targetPos));
+
+            character.OnSlide(slidePowerCost);
         }
     }
     private IEnumerator TriggerSlide(Vector3 target)
