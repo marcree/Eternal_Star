@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,17 +15,21 @@ public class PlayerController : MonoBehaviour
 public float speed;
 
 public float jumpForce;
-[Header("材质")]
+    public float hurtForce;
+    public float wallJumpForce;
+    public float slideDistance;
+    public float slideSpeed;
+    [Header("材质")]
 public PhysicsMaterial2D normal;
 public PhysicsMaterial2D wall;
 
 [Header("状态")]
 public bool isHurt;
-public float hurtForce;
-    public float wallJumpForce;
+
 public bool isDead;
 public bool isAttack;
     public bool wallJump;
+    public bool isSlide;
    private void Awake()
    {
 
@@ -34,6 +39,7 @@ public bool isAttack;
     inputControl = new PlayerInputControl();
     inputControl.Gameplay.Jump.started +=Jump;
     inputControl.Gameplay.Attack.started += PlayerAttack;
+        inputControl.Gameplay.Slide.started += Slide;
 
    }
    private void OnEnable()
@@ -99,6 +105,40 @@ private void PlayerAttack(InputAction.CallbackContext obj)
     isAttack = true;
 }
 
+    private void Slide(InputAction.CallbackContext obj)
+    {
+        if (!isSlide)
+        {
+            isSlide = true;
+
+            var targetPos = new Vector3(transform.position.x + slideDistance * transform.localScale.x, transform.position.y);
+
+            gameObject.layer = LayerMask.NameToLayer("Enemy");
+
+            StartCoroutine(TriggerSlide(targetPos));
+        }
+    }
+    private IEnumerator TriggerSlide(Vector3 target)
+    {
+        do
+        {
+            yield return null;
+            if (!physicsCheck.isGround)
+                break;
+            if(physicsCheck.touchLeftWall || physicsCheck.touchRightWall)
+            {
+                isSlide = false;
+                break;
+            }
+            rb.MovePosition(new Vector2(transform.position.x + transform.localScale.x * slideSpeed, transform.position.y));
+        }
+        while (Mathf.Abs(target.x - transform.position.x) > 0.11);
+
+        isSlide = false;
+        gameObject.layer = LayerMask.NameToLayer("Player");
+
+
+    }
 
 
 #region  UnityEvents
