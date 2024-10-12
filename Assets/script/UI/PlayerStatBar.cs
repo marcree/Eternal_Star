@@ -13,7 +13,7 @@ public class PlayerStatBar : MonoBehaviour
     {
         if(healthDelayImage.fillAmount > healthImage.fillAmount)
         {
-            healthDelayImage.fillAmount -= Time.deltaTime*2;
+            healthDelayImage.fillAmount -= Time.deltaTime*1;
         }
     }
     public void OnhealthChange(float persentage)
