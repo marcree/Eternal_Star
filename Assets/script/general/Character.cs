@@ -20,7 +20,8 @@ public bool invulnerable;
 
 public UnityEvent<Character> OnHealthChange;
 public UnityEvent<Transform> OnTakeDamage;
-public UnityEvent OnDie;
+   //public UnityEvent<Transform> HurtAttacker;
+    public UnityEvent OnDie;
 
 private void Start()
 {

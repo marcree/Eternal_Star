@@ -7,6 +7,7 @@ public class PhysicsCheck : MonoBehaviour
 
     private CapsuleCollider2D coll;
     public Enemy enemy;
+    public Boss boss;
     private PlayerController playerController;
     private Rigidbody2D rb;
 

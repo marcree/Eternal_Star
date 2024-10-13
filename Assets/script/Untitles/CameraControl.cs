@@ -24,7 +24,7 @@ public class CameraControl : MonoBehaviour
     }
     private void OnCameraShakeEvent()
     {
-        impulseSource.GenerateImpulse();
+        //impulseSource.GenerateImpulse();
     }
     //场景切换后更换
     private void Start()
