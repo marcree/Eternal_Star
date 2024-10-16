@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BehaviorDesigner.Runtime.Tasks;
 
-public class BossConditonal : MonoBehaviour
+public class BossConditonal : Conditional
 {
-    // Start is called before the first frame update
-    void Start()
+ protected Rigidbody2D body;
+    protected Animator animator;
+    protected PhysicsCheck check;
+
+    public override void OnAwake()
     {
-        
+        body.GetComponent<Rigidbody2D>();
+        animator = gameObject.GetComponentInChildren<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
