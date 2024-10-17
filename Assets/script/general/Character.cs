@@ -47,7 +47,18 @@ private void Update()
         }
 }
 
-  public void TakeDamage(Attack attacker)
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Water"))
+        {
+            //死亡并更新血量
+            currentHealth = 0;
+            OnHealthChange?.Invoke(this);
+            OnDie?.Invoke();
+        }
+    }
+
+    public void TakeDamage(Attack attacker)
   {
     if(invulnerable)
         return;

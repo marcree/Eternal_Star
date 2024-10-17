@@ -8,18 +8,18 @@ public class BossAttack : Action
 {
     public Animator animator;
     public GameObject player;
-
+    string one = "Attack";
     
 
     public override void OnStart()
     {
         //ÇÐ»»¶¯»­×´Ì¬Îª¹¥»÷
-        animator.SetTrigger("Attack");
+        animator.SetTrigger(one);
     }
 
     public override void OnEnd()
     {
-        animator.SetTrigger("jump");
+        //animator.SetTrigger("jump");
     }
 
 }

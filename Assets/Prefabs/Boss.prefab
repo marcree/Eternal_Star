@@ -119,14 +119,14 @@ GameObject:
   m_Component:
   - component: {fileID: 3872079865598211634}
   - component: {fileID: 8184714675119862502}
-  - component: {fileID: 5188225155302957987}
   - component: {fileID: 2332443235464481419}
   - component: {fileID: 7924843084966792042}
   - component: {fileID: 10346078819834089}
   - component: {fileID: 615692341280000460}
   - component: {fileID: 4243238043969228193}
+  - component: {fileID: 8677314868527893834}
+  - component: {fileID: 7210001582309352585}
   - component: {fileID: 2876146272412532947}
-  - component: {fileID: 8927065007517305867}
   m_Layer: 8
   m_Name: Boss
   m_TagString: Boss
@@ -143,7 +143,7 @@ Transform:
   m_GameObject: {fileID: 7781941620119354963}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.33, y: 12.86, z: -0.204073}
+  m_LocalPosition: {x: 4.587583, y: 5.6379786, z: -0.014147775}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -202,27 +202,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &5188225155302957987
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7781941620119354963}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e0283af25f19dac4dbb2e960f71a6b0c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2332443235464481419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,9 +217,9 @@ MonoBehaviour:
   startWhenEnabled: 1
   asynchronousLoad: 0
   pauseWhenDisabled: 0
-  restartWhenComplete: 0
+  restartWhenComplete: 1
   logTaskChanges: 0
-  group: 0
+  group: 1
   resetValuesOnRestart: 0
   externalBehavior: {fileID: 11400000, guid: 9b85abee50694c04195e97c75c8eeee7, type: 2}
   mBehaviorSource:
@@ -275,7 +254,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 4
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -288,7 +267,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &10346078819834089
 BoxCollider2D:
@@ -423,6 +402,59 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!95 &8677314868527893834
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781941620119354963}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e0283af25f19dac4dbb2e960f71a6b0c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7210001582309352585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781941620119354963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe3ebe66ca964e859b225c5acaec9e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  manual: 0
+  isPlayer: 0
+  checkRaduis: 0
+  bottomOffset: {x: 0, y: 0}
+  leftOffset: {x: 0, y: 0}
+  rightOffset: {x: 0, y: 0}
+  checkLeft: {x: 0, y: 0}
+  checkRight: {x: 0, y: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  isGround: 0
+  touchGround: 0
+  isCliff: 0
+  touchLeftWall: 0
+  touchRightWall: 0
+  onWall: 0
+  leftPoint: 0
+  rightPoint: 0
 --- !u!114 &2876146272412532947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,10 +467,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f89f2ec893ec94d92742d1377a2dec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  anim: {fileID: 0}
-  character: {fileID: 0}
-  physicsCheck: {fileID: 0}
+  rb: {fileID: 7924843084966792042}
+  anim: {fileID: 8677314868527893834}
+  character: {fileID: 4243238043969228193}
+  physicsCheck: {fileID: 7210001582309352585}
   attack_info: {fileID: 0}
   normalSpeed: 0
   chaseSpeed: 0
@@ -467,35 +499,3 @@ MonoBehaviour:
   isDead: 0
   canAttack: 0
   isAttack: 0
---- !u!114 &8927065007517305867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7781941620119354963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbe3ebe66ca964e859b225c5acaec9e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
-  manual: 0
-  isPlayer: 0
-  checkRaduis: 0.1
-  bottomOffset: {x: 0, y: 0.56}
-  leftOffset: {x: -1.7, y: 2.37}
-  rightOffset: {x: 1.41, y: 2.35}
-  checkLeft: {x: 0, y: 0}
-  checkRight: {x: 0, y: 0}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  isGround: 0
-  touchGround: 0
-  isCliff: 0
-  touchLeftWall: 0
-  touchRightWall: 0
-  onWall: 0
-  leftPoint: 0
-  rightPoint: 0

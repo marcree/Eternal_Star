@@ -16,7 +16,7 @@ public class DisableAnimatorAndTreeOnZeroHealth : MonoBehaviour
         behaviorTree = GetComponent<BehaviorTree>();
     }
 
-    public void CheckHealth(int currentHealth)
+    public void CheckHealth()
     {
         if (character.currentHealth <= 0)
         {
