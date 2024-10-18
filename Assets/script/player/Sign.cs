@@ -4,7 +4,8 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.ParticleSystemJobs;
-using UnityEngine.InputSystem.DualShock;//ÊÖ±ú
+using UnityEngine.InputSystem.DualShock;//ï¿½Ö±ï¿½
+using System;
 
 public class Sign : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Sign : MonoBehaviour
     public GameObject signSprite;
     public Transform playerTrans;
     public bool canPress;
+
+    private IInteractable targetItem;
 
     private void Awake()
     {
@@ -29,7 +32,20 @@ public class Sign : MonoBehaviour
     private void OnEnable()
     {
         InputSystem.onActionChange += onActionChange;
+        playerInput.Gameplay.Confirm.started += OnConfirm;
+
     }
+
+    private void OnConfirm(InputAction.CallbackContext obj)
+    {
+        if (canPress)
+        {
+            targetItem.TriggerAction();
+        }
+    }
+
+
+
     private void onActionChange(object obj,InputActionChange actionChange)
     {
         if(actionChange ==InputActionChange.ActionStarted)
@@ -52,6 +68,7 @@ public class Sign : MonoBehaviour
         if(other.CompareTag("interactable"))
         {
             canPress = true;
+            targetItem = other.GetComponent<IInteractable>();
         }
 
        
