@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
@@ -39,24 +41,34 @@ public class SceneLoader : MonoBehaviour
         {
             StartCoroutine(UnLoadPreviousScene());
         }
+        else
+        {
+            LoadNewScene();
+        }
     }
 
     private IEnumerator UnLoadPreviousScene()
     {
         if(fadeScreen)
         {
-           
+            //fadeEvent.FadeIn(fadeDuration);
         }
         yield return new WaitForSeconds(fadeDuration);
        
         
         currentLoadedScene.sceneReference.UnLoadScene();
         
+
         LoadNewScene();
     }
 
     private void LoadNewScene()
     {
-        sceneToLoad.sceneReference.LoadSceneAsync(LoadSceneMode.Additive,true);
+        var loadingOption = sceneToLoad.sceneReference.LoadSceneAsync(LoadSceneMode.Additive,true);
+        loadingOption.Completed += OnLoadCompleted;
     }
-}
+        private void OnLoadCompleted(AsyncOperationHandle<SceneInstance> obj)
+        { 
+    
+         }
+    }
