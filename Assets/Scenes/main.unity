@@ -334,7 +334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &337738169
 RectTransform:
   m_ObjectHideFlags: 0
@@ -366,6 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51e81e81bf2881e4193ae5b61e00c205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeEvent: {fileID: 11400000, guid: 8c11cd91e2c95c34ea319962695351c4, type: 2}
   fadeImage: {fileID: 337738171}
 --- !u!114 &337738171
 MonoBehaviour:
@@ -892,7 +893,7 @@ Transform:
   m_GameObject: {fileID: 1025793590}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.67, y: 6.2, z: -10}
+  m_LocalPosition: {x: 2.6699996, y: 6.2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1691,12 +1692,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTrans: {fileID: 415243313}
-  firstPosition: {x: 0, y: 0, z: 0}
+  firstPosition: {x: 0.47, y: 4.63, z: 0}
   loadEventSO: {fileID: 11400000, guid: 7ec6bcafa0e10c043965f9dd7399fab1, type: 2}
   firstLoadScene: {fileID: 11400000, guid: 9737339841ba91d49910957c19adac13, type: 2}
   currentLoadedScene: {fileID: 0}
-  fadeDuration: 0
+  fadeDuration: 1
   afterSceneLoadedEvent: {fileID: 11400000, guid: 03d3cbac79539414a8a788f0640e7d3c, type: 2}
+  fadeEvent: {fileID: 11400000, guid: 8c11cd91e2c95c34ea319962695351c4, type: 2}
 --- !u!4 &1516628141
 Transform:
   m_ObjectHideFlags: 0
