@@ -36,6 +36,11 @@ public class Sign : MonoBehaviour
 
     }
 
+    private void OnDisable()
+    {
+        canPress = false;
+    }
+
     private void OnConfirm(InputAction.CallbackContext obj)
     {
         if (canPress)

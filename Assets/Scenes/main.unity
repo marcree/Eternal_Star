@@ -334,7 +334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &337738169
 RectTransform:
   m_ObjectHideFlags: 0
@@ -961,6 +961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 311447fb2781240fda0bf7d0f07aecee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  afterSceneLoadedEvent: {fileID: 11400000, guid: 03d3cbac79539414a8a788f0640e7d3c, type: 2}
   impulseSource: {fileID: 0}
   cameraShakeEvent: {fileID: 11400000, guid: 1411ad51d220446439264c2544259d69, type: 2}
 --- !u!1 &1047000663
@@ -1689,10 +1690,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 754a125d630946c49bd2b8ef064d4b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTrans: {fileID: 415243313}
+  firstPosition: {x: 0, y: 0, z: 0}
   loadEventSO: {fileID: 11400000, guid: 7ec6bcafa0e10c043965f9dd7399fab1, type: 2}
   firstLoadScene: {fileID: 11400000, guid: 9737339841ba91d49910957c19adac13, type: 2}
   currentLoadedScene: {fileID: 0}
   fadeDuration: 0
+  afterSceneLoadedEvent: {fileID: 11400000, guid: 03d3cbac79539414a8a788f0640e7d3c, type: 2}
 --- !u!4 &1516628141
 Transform:
   m_ObjectHideFlags: 0

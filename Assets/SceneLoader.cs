@@ -9,7 +9,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    [Header("ÊÂ¼þ¼àÌý")]
+    public Transform playerTrans;
+    public Vector3 firstPosition;
+    [Header("ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public SceneLoadEventSO loadEventSO;
     public GameSceneSO firstLoadScene;
     [SerializeField]private GameSceneSO currentLoadedScene;
@@ -17,24 +19,41 @@ public class SceneLoader : MonoBehaviour
     private Vector3 positionToGo;
     private bool fadeScreen;
     public float fadeDuration;
+    private bool isLoading;
+    [Header("å¹¿æ’­")]
+    public VoidEventSO afterSceneLoadedEvent;
     private void Awake()
     {
        //Addressables.LoadSceneAsync(firstLoadScene.sceneReference,UnityEngine.SceneManagement.LoadSceneMode.Additive);
-        currentLoadedScene = firstLoadScene;
-        currentLoadedScene.sceneReference.LoadSceneAsync(LoadSceneMode.Additive);
+        //currentLoadedScene = firstLoadScene;
+        //currentLoadedScene.sceneReference.LoadSceneAsync(LoadSceneMode.Additive);
+    }
+    private void Start()
+    {
+        NewGame();
     }
     private void OnEnable()
     {
         loadEventSO.LoadRequestEvent += OnLoadRequestEvent;
     }
+
     private void OnDisable()
     {
         loadEventSO.LoadRequestEvent -= OnLoadRequestEvent;
     }
 
-    private void OnLoadRequestEvent(GameSceneSO locationToGo, Vector3 posToGo, bool fadeScreen)
+
+    private void NewGame()
     {
-        sceneToLoad = locationToGo;
+        sceneToLoad = firstLoadScene;
+        OnLoadRequestEvent(sceneToLoad, firstPosition, true);
+    }
+    private void OnLoadRequestEvent(GameSceneSO locationToLoad, Vector3 posToGo, bool fadeScreen)
+    {
+        if (isLoading)
+            return;
+        isLoading = true;
+        sceneToLoad = locationToLoad;
         positionToGo = posToGo;
         this.fadeScreen = fadeScreen;
         if (currentLoadedScene != null)
@@ -56,9 +75,9 @@ public class SceneLoader : MonoBehaviour
         yield return new WaitForSeconds(fadeDuration);
        
         
-        currentLoadedScene.sceneReference.UnLoadScene();
-        
+        yield return currentLoadedScene.sceneReference.UnLoadScene();
 
+        playerTrans.gameObject.SetActive(false);
         LoadNewScene();
     }
 
@@ -67,8 +86,19 @@ public class SceneLoader : MonoBehaviour
         var loadingOption = sceneToLoad.sceneReference.LoadSceneAsync(LoadSceneMode.Additive,true);
         loadingOption.Completed += OnLoadCompleted;
     }
-        private void OnLoadCompleted(AsyncOperationHandle<SceneInstance> obj)
-        { 
-    
-         }
+
+    private void OnLoadCompleted(AsyncOperationHandle<SceneInstance> obj)
+    {
+        currentLoadedScene = sceneToLoad;
+
+        playerTrans.position = positionToGo;
+
+        playerTrans.gameObject.SetActive(true);
+        if(fadeScreen)
+        {
+            //fadeEvent.FadeOut(fadeDuration);
+        }
+        isLoading = false;
+        afterSceneLoadedEvent.RaiseEvent();
     }
+}

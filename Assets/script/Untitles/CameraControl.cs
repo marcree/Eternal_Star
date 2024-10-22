@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using System;
 
 public class CameraControl : MonoBehaviour
 {
+    [Header("事件监听")]
+    public VoidEventSO afterSceneLoadedEvent;
     private CinemachineConfiner2D confiner2D;
 
     public CinemachineImpulseSource impulseSource;
@@ -17,20 +20,28 @@ public class CameraControl : MonoBehaviour
     private void OnEnable() 
     {
         cameraShakeEvent.OnEventRaised += OnCameraShakeEvent;
+        afterSceneLoadedEvent.OnEventRaised += onAfterSceneLoadedEvent;
     }
     private void OnDisable()
     {
         cameraShakeEvent.OnEventRaised -= OnCameraShakeEvent;
+        afterSceneLoadedEvent.OnEventRaised -= onAfterSceneLoadedEvent;
     }
+
+    private void onAfterSceneLoadedEvent()
+    {
+        GetNewCameraBounds();
+    }
+
     private void OnCameraShakeEvent()
     {
         //impulseSource.GenerateImpulse();
     }
     //场景切换后更换
-    private void Start()
-    {
-        GetNewCameraBounds();
-    }
+    //private void Start()
+    //{
+        //GetNewCameraBounds();
+    //}
     private void GetNewCameraBounds()
     {
         var obj = GameObject.FindGameObjectWithTag("Bounds");

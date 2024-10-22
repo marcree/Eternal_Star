@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 677953472}
   - component: {fileID: 677953471}
   - component: {fileID: 677953470}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BossPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
