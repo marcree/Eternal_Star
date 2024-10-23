@@ -1578,7 +1578,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1514990475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1696,7 +1696,7 @@ MonoBehaviour:
   loadEventSO: {fileID: 11400000, guid: 7ec6bcafa0e10c043965f9dd7399fab1, type: 2}
   firstLoadScene: {fileID: 11400000, guid: 9737339841ba91d49910957c19adac13, type: 2}
   currentLoadedScene: {fileID: 0}
-  fadeDuration: 1
+  fadeDuration: 1.5
   afterSceneLoadedEvent: {fileID: 11400000, guid: 03d3cbac79539414a8a788f0640e7d3c, type: 2}
   fadeEvent: {fileID: 11400000, guid: 8c11cd91e2c95c34ea319962695351c4, type: 2}
 --- !u!4 &1516628141
